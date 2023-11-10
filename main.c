@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <string.h>
+#include "service.h"
+
 
 int main(){
-    printf("Ce drq fac aici...\n");
+    run_menu();
     return 0;
 }

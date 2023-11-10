@@ -1,0 +1,1 @@
+int valid_command(char command[]);

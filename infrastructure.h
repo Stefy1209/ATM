@@ -1,0 +1,1 @@
+char get_command(char command[1001]);
