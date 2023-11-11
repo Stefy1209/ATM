@@ -34,5 +34,5 @@ void printf_tranzaction(tranzaction x){
         strcpy(type, "Expense");
     }
 
-    printf("Date: %d/%d/%d\nDescription: %s\nAmount: %f\nType: %s\n", get_day(x.date), get_month(x.date), get_year(x.date), x.description, x.amount, type);
+    printf("Date: %d/%d/%d\nDescription: %s\nAmount: %f\nType: %s\n\n", get_day(x.date), get_month(x.date), get_year(x.date), x.description, x.amount, type);
 }
