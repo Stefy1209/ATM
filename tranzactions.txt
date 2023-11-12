@@ -1,2 +1,7 @@
-0
+1
+
+Date: 09/01/2004
+Description: a
+Amount: 12.000000
+Type: Income
 

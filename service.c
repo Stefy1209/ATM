@@ -73,12 +73,13 @@ void run_menu(){
 }
 
 void read_command(char command[1001]){
+    //reads command as a string
     printf(">>> ");
     get_command(command);
 }
 
 void addMenu(tranzaction ListTranzactions[], int *l){
-    //
+    //reads the information of a tranzaction like date, description, amount and type and adds it to a list
     //reads and validate the information
     char Date[12], description[301], amount[301], type[101];
     int valid;
@@ -167,6 +168,7 @@ void addMenu(tranzaction ListTranzactions[], int *l){
 }
 
 void calculateBalance(tranzaction ListTranzactions[], int numberTranzactions){
+    //calculate the amount of money you have depending on the tranzactions from ListTranzactions
     float total = 0;
     for(int i = 0; i < numberTranzactions; i++){
         if(ListTranzactions[i].type == 0)
@@ -177,6 +179,7 @@ void calculateBalance(tranzaction ListTranzactions[], int numberTranzactions){
 }
 
 void betweenMenu(tranzaction ListTranzactions[], int numberTranzactions){
+    //shows all the tranzactions between date 1 and date 2 depending on the order of your list of tranzactions
     char date1[12], date2[12];
     int valid ;
 
@@ -244,6 +247,7 @@ void betweenMenu(tranzaction ListTranzactions[], int numberTranzactions){
 }
 
 void loadFile(tranzaction ListTranzactions[], int *numberTranzactions, FILE *fptr){
+    //adds all the saved tranzactions from a file to your current list of tranzactions
     fptr = fopen("tranzactions.txt", "r");
 
     char cnr[301];
@@ -320,8 +324,10 @@ void loadFile(tranzaction ListTranzactions[], int *numberTranzactions, FILE *fpt
             type = 0;
         else type = 1;
 
+        //creates a tranzaction
         tranzaction t = create_tranzaction(data, description, amount, type);
 
+        //adds tranzaction at the end of the list
         ListTranzactions[*numberTranzactions] = t;
         *numberTranzactions = *numberTranzactions + 1;
     }
@@ -330,6 +336,7 @@ void loadFile(tranzaction ListTranzactions[], int *numberTranzactions, FILE *fpt
 }
 
 void saveFile(tranzaction ListTranzactions[], int numberTranzactions, FILE *fptr){
+    //all information from the ListTranzactions will be saved in a file
     fptr = fopen("tranzactions.txt", "w");
 
     fprintf(fptr, "%d\n\n", numberTranzactions);
@@ -347,6 +354,20 @@ void saveFile(tranzaction ListTranzactions[], int numberTranzactions, FILE *fptr
             strcpy(type, "Expense");
         }
 
-        fprintf(fptr, "Date: %d/%d/%d\nDescription: %s\nAmount: %f\nType: %s\n\n", get_day(x.data), get_month(x.data), get_year(x.data), x.description, x.amount, type);
+        int day, month, year;
+        day = get_day(x.data);
+        month = get_month(x.data);
+        year = get_year(x.data);
+
+        fprintf(fptr, "Date: ");
+        if(1 <= day && day <=9)
+            fprintf(fptr, "0%d/", day);
+        else fprintf(fptr, "%d/", day);
+
+        if(1 <= month && month <= 9)
+            fprintf(fptr, "0%d/", month);
+        else fprintf(fptr, "%d/", month);
+
+        fprintf(fptr, "%d\nDescription: %s\nAmount: %f\nType: %s\n\n", year, x.description, x.amount, type);
     }
 }

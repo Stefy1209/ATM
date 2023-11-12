@@ -5,7 +5,7 @@
 char listCommands[7][1001] = {"add", "print", "balance", "load", "save", "between", "exit"};
 
 int valid_command(char command[1001]){
-    //
+    //validates of a command is valid
     int i;
 
     for(i = 0; i < strlen(command); i++)
@@ -22,7 +22,8 @@ int valid_command(char command[1001]){
 int numberDays[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int validate_date(char date[11]){
-    //
+    //validates if a string can be interpreted as a date
+    //verifies if the string is made out of digits and '/'
     int i, day, month, year;
     char number[5] = "";
 
@@ -56,9 +57,11 @@ int validate_date(char date[11]){
     strncpy(number, date+6, 4);
     year = transform_char_to_int(number);
 
+    //verifies if day, month or year is not 0
     if(day*month*year == 0)
         return 0;
 
+    //verifies if the year is bissextile
     int bisect = 0;
     if((year % 4 == 0 && year%100 != 0) || (year % 400 == 0))
         bisect = 1;
@@ -77,7 +80,7 @@ int validate_date(char date[11]){
 }
 
 int validate_amount(char amount[301]){
-    //
+    //verifies if a string can be interpreted as a number
     int nrDot = 0, nrDigits = 0, i;
 
     for(i = 0; i < strlen(amount); i++){
@@ -102,8 +105,8 @@ int validate_amount(char amount[301]){
 char typesList[2][101] = {"income", "expense"};
 
 int validate_type(char type[101]){
+    //verifies if a string ca be interpreted as "income" or "expense"
     int i;
-
     for(i = 0; i < strlen(type); i++)
         if('A' <= type[i] && type[i] <= 'Z')
             type[i] = type[i] + ('a' - 'A');        
