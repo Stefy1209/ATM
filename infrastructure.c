@@ -8,11 +8,11 @@ void get_command(char command[1001]){
     command[strlen(command) - 1] = '\0';
 }
 
-char listActions[4][1001] = {"add", "print", "balance", "load", "save", "exit"};
+char listActions[7][1001] = {"add", "print", "balance", "load", "save", "between", "exit"};
 
 int action(char command[1001]){
     //
-    for(int i = 0 ; i < 6; i++)
+    for(int i = 0 ; i < 7; i++)
         if(strcmp(command, listActions[i]) == 0)
             return i;
 }

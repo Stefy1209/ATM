@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "infrastructure.h"
 
-char listCommands[4][1001] = {"add", "print", "balance", "load", "save", "exit"};
+char listCommands[7][1001] = {"add", "print", "balance", "load", "save", "between", "exit"};
 
 int valid_command(char command[1001]){
     //
@@ -12,7 +12,7 @@ int valid_command(char command[1001]){
         if('A' <= command[i] && command[i] <= 'Z')
             command[i] = command[i] + ('a' - 'A');  
 
-    for(i = 0 ; i < 6; i++)
+    for(i = 0 ; i < 7; i++)
         if(strcmp(command, listCommands[i]) == 0)
             return 1;
 

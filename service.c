@@ -8,11 +8,15 @@
 void read_command();
 void addMenu();
 void calculateBalance();
+void betweenMenu();
+void loadFile();
+void saveFile();
 
 void run_menu(){
     tranzaction v[1000];
-    int l = 0, finished = 0, valid;
+    int l = 0, finished = 0, valid, loaded = 0;
     char command[1001];
+    FILE *fptr;
 
     while(!finished){
         //validare comand
@@ -21,7 +25,7 @@ void run_menu(){
 
             valid = valid_command(command);
             if(valid == 0)
-                printf("Invalid comand!\n");
+                printf("\nInvalid comand!\n\n");
 
         }while(!valid);
 
@@ -42,7 +46,26 @@ void run_menu(){
                 calculateBalance(v, l);
                 break;
 
-            case 3://exit program
+            case 3://load tranzactions from file
+                if(!loaded){
+                    loadFile(v, &l, fptr);
+                    loaded = 1;
+                }
+                break;
+
+            case 4://save tranzactions in file
+                if(!loaded){
+                    loadFile(v, &l, fptr);
+                    loaded = 1;
+                }
+                saveFile(v, l, fptr);
+                break;
+
+            case 5://show the tranzactions between e dates
+                betweenMenu(v, l);
+                break;
+
+            case 6://exit program
                 finished = 1;
                 break;
         }
@@ -69,7 +92,7 @@ void addMenu(tranzaction ListTranzactions[], int *l){
         valid = validate_date(Date);
 
         if(!valid){
-            printf("Invalid date!\n");
+            printf("\nInvalid date!\n\n");
         }
     }while(!valid);
 
@@ -89,7 +112,7 @@ void addMenu(tranzaction ListTranzactions[], int *l){
         valid = validate_amount(amount);
 
         if(!valid){
-            printf("Invalid number!\n");
+            printf("\nInvalid number!\n\n");
         }
     }while(!valid);
 
@@ -101,7 +124,7 @@ void addMenu(tranzaction ListTranzactions[], int *l){
         valid = validate_type(type);
 
         if(!valid){
-            printf("Invalid type!\n");
+            printf("\nInvalid type!\n\n");
         }
     }while(!valid);
 
@@ -128,7 +151,7 @@ void addMenu(tranzaction ListTranzactions[], int *l){
 
     //creates a type
     int v;
-    for(int i = 0; i < strlen(amount); i++)
+    for(int i = 0; i < strlen(type); i++)
         if('A' <= type[i] && type[i] <= 'Z')
             type[i] = type[i] + ('a' - 'A');
 
@@ -151,4 +174,179 @@ void calculateBalance(tranzaction ListTranzactions[], int numberTranzactions){
         else total -= ListTranzactions[i].amount;
     }
     printf("%f\n\n", total);
+}
+
+void betweenMenu(tranzaction ListTranzactions[], int numberTranzactions){
+    char date1[12], date2[12];
+    int valid ;
+
+    do{
+        date1[0] = '\0';
+        printf("From: ");
+        fgets(date1, 12, stdin);
+        date1[strlen(date1) - 1] = '\0';
+
+        valid = validate_date(date1);
+
+        if(!valid){
+            printf("\nInvalid date!\n\n");
+        }
+    }while(!valid);
+
+    do{
+        date2[0] = '\0';
+        printf("To: ");
+        fgets(date2, 12, stdin);
+        date2[strlen(date2) - 1] = '\0';
+
+        valid = validate_date(date2);
+
+        if(!valid){
+            printf("\nInvalid date!\n\n");
+        }
+    }while(!valid);
+
+    printf("\n");
+
+    date Date1, Date2;
+    int day, month, year;
+    char number[10] = "";
+
+    //creates date 1
+    strncpy(number, date1, 2);
+    day = transform_char_to_int(number);
+
+    strncpy(number, date1 + 3, 2);
+    month = transform_char_to_int(number);
+
+    strncpy(number, date1 + 6, 4);
+    year = transform_char_to_int(number);
+
+    Date1 = create_date(day, month, year);
+
+    //creates date 2
+    strncpy(number, date2, 2);
+    day = transform_char_to_int(number);
+
+    strncpy(number, date2 + 3, 2);
+    month = transform_char_to_int(number);
+
+    strncpy(number, date2 + 6, 4);
+    year = transform_char_to_int(number);
+
+    Date2 = create_date(day, month, year);
+
+    //shows the tranzactions between date 1 and date 2
+    for(int i = 0; i < numberTranzactions; i++){
+        if(is_after(ListTranzactions[i].data, Date1) && is_before(ListTranzactions[i].data, Date2))
+            printf_tranzaction(ListTranzactions[i]);
+    }
+}
+
+void loadFile(tranzaction ListTranzactions[], int *numberTranzactions, FILE *fptr){
+    fptr = fopen("tranzactions.txt", "r");
+
+    char cnr[301];
+    int nr;
+
+    fgets(cnr, 300, fptr);
+    if(cnr[strlen(cnr) - 1] == '\n') 
+        cnr[strlen(cnr) - 1] = '\0';
+    
+    nr = transform_char_to_int(cnr);
+
+    char string[301];
+    for(int i = 1; i <= nr; i++){
+        //reads the Date line
+        fgets(string, 300, fptr);
+        fgets(string, 300, fptr);
+        if(string[strlen(string) - 1] == '\n') 
+            string[strlen(string) - 1] = '\0';
+
+        //creates the date
+        int day, month, year;
+        char number[10] = "", Date[301];
+        strcpy(Date, string + 6);
+
+        strncpy(number, Date, 2);
+        day = transform_char_to_int(number);
+
+        strncpy(number, Date + 3, 2);
+        month = transform_char_to_int(number);
+
+        strncpy(number, Date + 6, 4);
+        year = transform_char_to_int(number);
+
+        date data = create_date(day, month, year);
+
+        //reads description line
+        string[0] = '\0';
+        fgets(string, 300, fptr);
+        if(string[strlen(string) - 1] == '\n') 
+            string[strlen(string) - 1] = '\0';
+
+        //creates description
+        char description[301];
+        strcpy(description, string + 13);
+
+        //reads the amount line
+        string[0] = '\0';
+        fgets(string, 300, fptr);
+        if(string[strlen(string) - 1] == '\n') 
+            string[strlen(string) - 1] = '\0';
+
+        //creates the amount
+        char Camount[301];
+        float amount;
+        strcpy(Camount, string + 8);
+        amount = transform_char_to_float(Camount);
+
+        //reads the type line
+        string[0] = '\0';
+        fgets(string, 300, fptr);
+        if(string[strlen(string) - 1] == '\n') 
+            string[strlen(string) - 1] = '\0';
+
+        //creates type
+        char Ctype[301];
+        int type;
+        strcpy(Ctype, string+6);
+
+        for(int i = 0; i < strlen(Ctype); i++)
+            if('A' <= Ctype[i] && Ctype[i] <= 'Z')
+                Ctype[i] = Ctype[i] + ('a' - 'A');
+
+        if(strcmp(Ctype, "income") == 0)
+            type = 0;
+        else type = 1;
+
+        tranzaction t = create_tranzaction(data, description, amount, type);
+
+        ListTranzactions[*numberTranzactions] = t;
+        *numberTranzactions = *numberTranzactions + 1;
+    }
+
+    fclose(fptr);
+}
+
+void saveFile(tranzaction ListTranzactions[], int numberTranzactions, FILE *fptr){
+    fptr = fopen("tranzactions.txt", "w");
+
+    fprintf(fptr, "%d\n\n", numberTranzactions);
+
+    tranzaction x;
+    
+    for(int i = 0; i < numberTranzactions; i++){
+        x = ListTranzactions[i];
+        char type[10];
+
+        if(x.type == 0){
+            strcpy(type, "Income");
+        }
+        else{
+            strcpy(type, "Expense");
+        }
+
+        fprintf(fptr, "Date: %d/%d/%d\nDescription: %s\nAmount: %f\nType: %s\n\n", get_day(x.data), get_month(x.data), get_year(x.data), x.description, x.amount, type);
+    }
 }
