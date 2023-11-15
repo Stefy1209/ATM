@@ -19,7 +19,7 @@ Lista de comenzi posibile:
     between - afiseaza toate tranzactiile dintre 2 date calanderistice in ordinea regasita in lista de tranzactii
     exit - inchidere aplicatie
 
-IMPORANTANT!:
+IMPORTANT!:
 
     Comenzile pot fi scrise atat cu litere mici cat si cu litere mari, in schimb imediat dupa ele daca apare un caracter,chiar si SPACE, atunci aplicatia va semnala "Invalid command!".
 
