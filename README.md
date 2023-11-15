@@ -2,11 +2,15 @@
 Proiect 1 Programare in C
 
 Cum intrucat aceasta aplicatia nu are interfata grafica, ea va fi rulata in lini de comanda.
+
 Pentru a deschide aplicatia trebuie scrisa comanda "./main".
+
 Odata deschisa va aparea pe prima linie ">>>" semnaland faptul ca asteapta o comanda.
-De fiecare data cand este pornita aplicatia lista de tranzactii va fi mereu goala in prima instanta
+
+De fiecare data cand este pornita aplicatia lista de tranzactii va fi mereu goala in prima instanta.
 
 Lista de comenzi posibile:
+
     add - adauga o tranzactie in lista de tranzactii
     print - afiseaza toate tranzactiile adaugate de la rularea programului
     load - incarca toate tranzactiile salvate in lista actuala de tranzactii
@@ -15,6 +19,7 @@ Lista de comenzi posibile:
     exit - inchidere aplicatie
 
 IMPORANTANT!:
+
     Comenzile pot fi scrise atat cu litere mici cat si cu litere mari, in schimb imediat dupa ele daca apare un caracter,chiar si SPACE, atunci aplicatia va semnala "Invalid command!".
 
 Toate tranzactiile vor aparea si vor fi citite sub forma:
@@ -25,6 +30,7 @@ Amount: un numar pozitiv
 Type: income/expense
 
 IMPORTANT!:
+
     In completarea datei, ziua si luna trebuie scrise mereu cu 2 cifre.
     De exemplu: pentru 9/12/2004 va trebui completat cu 09/12/2004
                 pentru 1/1/2003  va trebui completat cu 01/01/2003
@@ -39,6 +45,7 @@ IMPORTANT!:
 In fisierul in care se salveaza tranzactiile, pe prima linie va aparea numarul de tranzactii iar pe urmatoarele linii vor aparea tranzactiile separate de o linie goala.
 
 IMPORTANT!:
+
     In momentul in care se apeleaza comanda "save", daca inainte nu a fost apelat "load" atunci aceasta se va apela automat.
 
     In schimb, daca inainte de "exit" nu au fost salvate anumite tranzactii, atunci acele tranzactii nu vor fi salvate. 
