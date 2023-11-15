@@ -13,6 +13,7 @@ Lista de comenzi posibile:
 
     add - adauga o tranzactie in lista de tranzactii
     print - afiseaza toate tranzactiile adaugate de la rularea programului
+    balance - afiseaza suma de bani in functie de tranzactiile din lista de tranzactii
     load - incarca toate tranzactiile salvate in lista actuala de tranzactii
     save - salveaza intr-un fisier toate tranzactiile adaugate in lista de tranzactii pana la apelarea functiei
     between - afiseaza toate tranzactiile dintre 2 date calanderistice in ordinea regasita in lista de tranzactii
