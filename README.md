@@ -1,5 +1,6 @@
 # ATM
 Proiect 1 Programare in C
+Gramada Stefan Lucian - Informatica romana - Grupa 213
 
 Cum intrucat aceasta aplicatia nu are interfata grafica, ea va fi rulata in lini de comanda.
 
