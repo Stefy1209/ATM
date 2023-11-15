@@ -26,8 +26,11 @@ IMPORTANT!:
 Toate tranzactiile vor aparea si vor fi citite sub forma:
 
 Date: dd/mm/yyyy
+
 Description: text
+
 Amount: un numar pozitiv
+
 Type: income/expense
 
 IMPORTANT!:
