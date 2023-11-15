@@ -229,6 +229,7 @@ void betweenMenu(tranzaction ListTranzactions[], int numberTranzactions){
 
     //creates date 2
     strncpy(number, date2, 2);
+    number[2] = '\0';
     day = transform_char_to_int(number);
 
     strncpy(number, date2 + 3, 2);

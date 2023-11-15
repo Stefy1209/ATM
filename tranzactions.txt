@@ -1,7 +1,22 @@
-1
+4
 
 Date: 09/01/2004
 Description: bax de apa
 Amount: 12.000000
 Type: Expense
+
+Date: 01/01/2023
+Description: bilet de schi
+Amount: 50.000000
+Type: Expense
+
+Date: 12/09/2023
+Description: bilet concert
+Amount: 25.000000
+Type: Expense
+
+Date: 23/07/2023
+Description: salariu
+Amount: 2500.000000
+Type: Income
 
