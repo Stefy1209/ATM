@@ -1,7 +1,7 @@
 1
 
 Date: 09/01/2004
-Description: a
+Description: bax de apa
 Amount: 12.000000
-Type: Income
+Type: Expense
 

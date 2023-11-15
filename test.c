@@ -46,5 +46,5 @@ int validateTest(){
 }
 
 int runTests(){
-    validateTest();
+    return validateTest();
 }
